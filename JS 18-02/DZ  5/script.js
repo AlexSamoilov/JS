@@ -11,6 +11,6 @@ function move () {
 	else {
 		step++;
 		elem.style.left = step + '%';
-		elem.style.top = step + '%';
+		elem.top = step + '%';
 	}
 }
