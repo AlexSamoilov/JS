@@ -1,0 +1,22 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.game-zone {
+	height: 100vh;
+	overflow: hidden;
+	background-color: #f0f0f0;
+	position: relative;
+}
+
+.platform {
+	width: 200px;
+	height: 20px;
+	position: absolute;
+	z-index: 100;
+	bottom: 0;
+	left: 0;
+	background-color: red;
+}
