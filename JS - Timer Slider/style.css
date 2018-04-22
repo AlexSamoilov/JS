@@ -23,3 +23,12 @@
 	display: block;
 	clear: both;
 }
+
+#slider-left {
+	color: green;
+	width: 100px;
+	height: 50px;
+	margin: 20px;
+	font-size: 20px;
+	font-weight: bold;
+}
