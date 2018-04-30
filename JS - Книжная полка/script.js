@@ -12,11 +12,19 @@ function addBookToLibrary() {
 		newArray[formData[key]['name']] = formData[key]['value'];
 	}
 	// console.log(newArray);
-	var randomArticle = Math.round(Math.random()*100000);
-	books[randomArticle] = newArray;
-	// console.log(books);
+	var data = $(this).attr('data');
+	if (data == undefined){
+		var randomArticle = Math.round(Math.random()*100000);
+		books[randomArticle] = newArray;
+		// console.log(books);
+		drawBook(randomArticle);
+	}
+	else {
+		books[data] = newArray;
+		drawBook(data);
+	}
+	console.log(books);
 	$('#modal-add-book').modal('hide');
-	drawBook(randomArticle);
 }
 
 function drawBook(article) {
@@ -36,10 +44,28 @@ function drawBook(article) {
 	bookYear.className = "book-year";
 	bookYear.innerHTML = books[article]['book-year'];
 
+	var buttonEdit = document.createElement('button');
+	buttonEdit.className = "btn btn-success edit";
+	buttonEdit.innerHTML = 'Edit';
+	buttonEdit.setAttribute('data', article);
+	buttonEdit.onclick = editBook;
+
 	div.appendChild(cover);
 	div.appendChild(bookName);
 	div.appendChild(bookYear);
+	div.appendChild(buttonEdit);
 
 	$('.book-panel').append(div);
 }
 
+function editBook() {
+	var data = $(this).attr('data');
+	console.log(data);
+	//show modal
+	$('#modal-add-book').modal('show');
+	$('form #book-name').val(books[data]['book-name']);
+	$('form #book-author').val(books[data]['book-author']);
+	$('form #book-cover').val(books[data]['book-cover']);
+	$('form #book-year').val(books[data]['book-year']);
+	$('#modal-add-book-ok').attr('data', data);
+}
