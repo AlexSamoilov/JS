@@ -15,6 +15,7 @@ function addBookToLibrary() {
 	var randomArticle = Math.round(Math.random()*100000);
 	books[randomArticle] = newArray;
 	// console.log(books);
+	$('#modal-add-book').modal('hide');
 	drawBook(randomArticle);
 }
 

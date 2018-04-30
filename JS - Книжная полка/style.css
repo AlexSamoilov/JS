@@ -1,0 +1,15 @@
+body {
+	background: #f4f7f6;
+}
+
+.book {
+	text-align: center;
+}
+
+.book-cover {
+	height: 250px;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50%;
+}
