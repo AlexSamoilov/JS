@@ -56,6 +56,7 @@ function drawBook(article){
         var buttonDelete = document.createElement('button');
         buttonDelete.className = "btn btn-warning edit";
         buttonDelete.innerHTML = 'Delete';
+        buttonDelete.setAttribute('data', article);
         buttonDelete.onclick = deleteBook;
 
         div.appendChild(cover);
@@ -80,7 +81,7 @@ function drawBook(article){
 }
 
 function editBook(){
-    var data  = $(this).attr('data');
+    var data = $(this).attr('data');
     console.log(data);
     //show modal
     $('#modal-add-book').modal('show');
@@ -93,4 +94,8 @@ function editBook(){
 
 function deleteBook(){
     $(this).parent('.book').remove();
+	var data = $(this).attr('data');
+	console.log(data);
+	delete books[data];
+	console.log(books);
 }
