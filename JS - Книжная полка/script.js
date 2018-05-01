@@ -2,12 +2,20 @@ var books = {};
 
 $(document).ready(function(){
     $('#modal-add-book-ok').on('click', addBookToLibrary);
+    var saveBooks = localStorage.getItem('library');
+    if (saveBooks) {
+    	books = JSON.parse(saveBooks);
+    	// console.log(books);
+    	for(var key in books) {
+    		drawBook(key);
+    	}
+    }
 });
 
 function addBookToLibrary(){
     var formData = $('form').serializeArray();
     // console.log(formData);
-    var newArray = [];
+    var newArray = {};
     for (key in formData){
         newArray[formData[key]['name']] = formData[key]['value'];
     }
@@ -25,7 +33,7 @@ function addBookToLibrary(){
     }
     console.log(books);
     $('#modal-add-book').modal('hide');
-   
+    localStorage.setItem('library', JSON.stringify(books));
 }
 
 function drawBook(article){
