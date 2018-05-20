@@ -1,4 +1,6 @@
 let comments = [];
+loadComments();
+
 document.getElementById('comment-add').onclick = function() {
 	event.preventDefault();
 	let commentName = document.getElementById('comment-name');
@@ -9,6 +11,42 @@ document.getElementById('comment-add').onclick = function() {
 		body : commentBody.value,
 		time : Math.floor(Date.now()/1000)
 	}
+	commentName.value = '';
+	commentBody.value = '';
+	comments.push(comment);
+	saveComments();
+	showComments();
+}
 
-	console.log(comment);
+function saveComments() {
+	localStorage.setItem('comments', JSON.stringify(comments));
+	showComments();
+}
+
+function loadComments() {
+	if (localStorage.getItem('comments')) comments = JSON.parse(localStorage.getItem('comments'));
+}
+
+function showComments() {
+	let commentField = document.getElementById('comment-field');
+	let out = '';
+	comments.forEach(function(item) {
+		out += `<p class="text-right small"><em>${timeConverter(item.time)}</em></p>`;
+		out += `<p class="alert alert-primary">${item.name}</p>`;
+		out += `<p class="alert alert-success">${item.name}</p>`;
+	});
+	commentField.innerHTML = out;
+}
+
+function timeConverter(UNIX_timestamp) {
+	var a = new Date(UNIX_timestamp * 1000);
+	var months = ['Jan','Feb','March','Apr','May','June','July','Aug','Sep','Oct','Now','Dec'];
+	var year = a.getFullYear();
+	var month = months[a.getMonth()];
+	var date = a.getDate();
+	var hour = a.getHours();
+	var min = a.getMinutes();
+	var sec = a.getSeconds();
+	var time = date + ' ' + month + ' ' + year + ' ' + hour + ' ' + min + ' ' + sec ;
+	return time;
 }
